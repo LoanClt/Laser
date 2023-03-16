@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import math as m
+import numpy as np
 
 A21 = 3*10**(6) #s-1
 sigmaP = 9.3*10**(-24) #m²
@@ -11,8 +12,6 @@ frequence = c/longueurOnde #s-1
 rayon = 50*10**(-6) #m
 surface = m.pi*rayon**2
 
-N = 50
-
 def deltaNsurN(I, puissancePompage):
     intensitePompage = puissancePompage / (surface * h * frequence)
     return sigmaP*intensitePompage/(A21 + sigma*I + sigmaP*intensitePompage)
@@ -20,14 +19,26 @@ def deltaNsurN(I, puissancePompage):
 Y = []
 Z = []
 W = []
-X = []
 
+"""
+X = np.linspace(1, m.log(10**50), 100000)
+for i in range(len(X)):
+    X[i] = m.log(X[i])
+    Y.append(deltaNsurN(X[i], 1))
+    Z.append(deltaNsurN(X[i], 10))
+    W.append(deltaNsurN(X[i], 100))
+
+"""
+X = []
+N = 500000
 for i in range(1, N):
     I = 10**i
     X.append(m.log(I))
-    Y.append(deltaNsurN(I, 1))
-    Z.append(deltaNsurN(I, 10))
-    W.append(deltaNsurN(I, 100))
+    Y.append(deltaNsurN(m.log(I), 1))
+    Z.append(deltaNsurN(m.log(I), 10))
+    W.append(deltaNsurN(m.log(I), 100))
+
+
 
 plt.plot(X, Y, label="P = 1W")
 plt.plot(X, Z, label="P = 10W")
