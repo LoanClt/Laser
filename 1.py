@@ -43,16 +43,16 @@ Z = deltaNsurN(X, 10)
 
 W = deltaNsurN(X, 100)
 
-plt.plot(np.log(X), Y, label="P = 1W")
+plt.plot(np.log(X), Y, label=r"$P_p = 1$W")
 
-plt.plot(np.log(X), Z, label="P = 10W")
+plt.plot(np.log(X), Z, label=r"$P_p = 10$W")
 
-plt.plot(np.log(X), W, label="P = 100W")
+plt.plot(np.log(X), W, label=r"$P_p = 100$W")
 
 plt.xlabel("log(I)")
 
 plt.legend()
 
-plt.ylabel("DeltaN/Nt")
+plt.ylabel(r"$\frac{\Delta n}{n_t}$")
 
 plt.xlim(60, 75)
